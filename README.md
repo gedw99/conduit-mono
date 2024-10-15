@@ -10,7 +10,8 @@ This is tested mostly on Mac, and in CI on Mac, Linux and Windows.
 
 ## Make system
 
-NOTE: all files in the root of this repo are replicated in from global system. 
+NOTE: all files in the root of this repo are replicated in from a global system. 
+So so not  change them :)  Make an Issue and we work it out.
 
 ## Setup
 
