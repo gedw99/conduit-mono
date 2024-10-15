@@ -29,10 +29,10 @@ ssh-add ~/.ssh/gedw99_github.com
 # 3. Add the public key to github on the web site
 https://github.com/settings/keys
 
-# 4. List added ssh (if in doubt )
+# 4. List added ssh ( if in doubt )
 ssh-add -l 
 
-# 5. Delete ssh key  (if you screw it up )
+# 5. Delete ssh key ( if you screw it up )
 ssh-add -d ~/.ssh/gedw99_github.com
 
 ```
