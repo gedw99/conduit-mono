@@ -27,6 +27,8 @@ Its pretty easy..
 
 If you already have ssh keys setup, just move on to step 2.
 
+In the example below, "gedw99" with your github handle.
+
 ```sh
 # 1. Make a new key
 ssh-keygen -t ed25519 -C "gedw99_github.com" -f ~/.ssh/gedw99_github.com
