@@ -44,10 +44,10 @@ this-dep: help-dep base-dep
 ### src
 
 SRC_CONDUIT=conduitio__conduit
-SRC_CONDUIT_CONNECT_FILE=conduitio__conduit-connector-file
-SRC_CONDUIT_CONNECT_S3=conduitio__conduit-connector-s3
-SRC_CONDUIT_PROCESSOR_EXAMPLE=conduit-processor-example
-SRC_CONDUIT_SCHEMA_REGISTRY=conduitio__conduit-schema-registry
+SRC_CONDUIT_CONNECT_FILE=conduitio__conduit_connector_file
+SRC_CONDUIT_CONNECT_S3=conduitio__conduit_connector_s3
+SRC_CONDUIT_PROCESSOR_EXAMPLE=conduitio__conduit_processor_example
+SRC_CONDUIT_SCHEMA_REGISTRY=conduitio__conduit_schema_registry
 SRC_CONDUIT_LAB_CONNECT_GOOGLE_SHEET=conduitio-labs__conduit_connector_google_sheets
 
 this-src: 
