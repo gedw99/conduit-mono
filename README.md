@@ -32,14 +32,17 @@ ssh-keygen -t ed25519 -C "gedw99_github.com" -f ~/.ssh/gedw99_github.com
 # 2. Add the private key to the ssh agent
 ssh-add ~/.ssh/gedw99_github.com
 
-# 3. Add the public key to github on the web site
-https://github.com/settings/keys
-
-# 4. List added ssh ( if in doubt )
+# 3. List added ssh ( if in doubt )
 ssh-add -l 
 
-# 5. Delete ssh key ( if you screw it up )
+# 4. Delete ssh key ( if you screw it up )
 ssh-add -d ~/.ssh/gedw99_github.com
+
+
+# 5. Add the public key to github on the web site
+# a. Copy the content of your public key like: "gedw99_github.com.pub"
+# b. Go to https://github.com/settings/keys and click "New SSH key"
+# Paste in the key contents 
 
 ```
 
