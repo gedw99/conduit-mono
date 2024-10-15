@@ -1,0 +1,34 @@
+version: 1.0                  
+
+pipelines:                    
+  pipeline1:                   
+    status: stopped             
+    name: pipeline1             
+    description: desc           
+    connectors:                 
+      con1:                 
+        type: source            
+        plugin: standalone:google-sheets  
+        name: googlesheet-source-sheet            
+        settings:              
+          credentialsFile: <path://to/credential/file>
+          tokensFile: <path://to/token/file>
+          sheetsURL: <URL of the google spreadsheet>
+          dateTimeRenderOption:
+          valueRenderOption:
+          pollingPeriod:
+      con2:
+        type: destination
+        plugin: standalone:nats-pubsub
+        name: nats-pubsub-DESTINATION
+        settings:
+           urls: <NATS connection URL> 
+           subject: sbj
+           connectionName:
+           nkeyPath:
+           credentialsFilePath:
+           tls.clientCertPath:
+           tls.clientPrivateKeyPath:
+           tls.rootCACertPath:
+           maxReconnects:
+           reconnectWait:
