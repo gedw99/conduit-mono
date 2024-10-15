@@ -10,6 +10,9 @@ include $(MK)/base_dev.env
 include $(MK)/caddy.mk
 include $(MK)/gh.mk
 include $(MK)/hugo.mk
+include $(MK)/nats_cli.mk
+include $(MK)/nats_server.mk
+include $(MK)/proc.mk
 
 
 
@@ -43,7 +46,7 @@ this-dep-del:
 	# just here for now to make sure base-dep works for everyone.
 	# golang, etc etc
 
-this-dep: help-dep base-dep gh-dep hugo-dep
+this-dep: help-dep base-dep caddy-dep gh-dep hugo-dep nats-cli-dep nats-server-dep proc-dep
 
 ### src
 

@@ -9,6 +9,8 @@
 
 CADDY_DEP=caddy
 
+CADDY_DEP_BIN=caddy
+
 CADDY_DEP_REPO=caddy
 CADDY_DEP_REPO_URL=https://github.com/caddyserver/caddy
 #CADDY_DEP_REPO_URL=https://github.com/gedw99/caddy
@@ -18,14 +20,16 @@ CADDY_DEP_MOD=github.com/caddyserver/caddy/v2
 CADDY_DEP_MOD_DEEP=$(CADDY_DEP_MOD)/cmd/caddy
 
 #https://github.com/caddyserver/caddy/releases/tag/v2.8.4
+# try it...
+# https://github.com/caddyserver/caddy/releases/tag/v2.9.0-beta.2
 CADDY_DEP_VERSION=v2.8.4
 
 CADDY_DEP_NATIVE=$(CADDY_DEP)_$(BASE_BIN_SUFFIX_NATIVE)
 CADDY_DEP_WHICH=$(shell command -v $(CADDY_DEP_NATIVE))
 
 # CGO_ENABLED=1 go install -tags extended github.com/gohugoio/hugo@latest
-CADDY_GO_INSTALL_CMD=CGO_ENABLED=1 $(BASE_DEP_BIN_GO_NAME) install -tags extended,osusergo,netgo
-CADDY_GO_BUILD_CMD=CGO_ENABLED=1 $(BASE_DEP_BIN_GO_NAME) build -tags extended,osusergo,netgo
+CADDY_GO_INSTALL_CMD=$(BASE_DEP_BIN_GO_NAME) install -tags extended,osusergo,netgo
+CADDY_GO_BUILD_CMD=$(BASE_DEP_BIN_GO_NAME) build -tags extended,osusergo,netgo
 
 ### meta
 
@@ -52,7 +56,7 @@ caddy-print:
 	@echo ""
 	@echo "- dep"
 	@echo "CADDY_DEP:              $(CADDY_DEP)"
-	@echo "CADDY_DEP_BIN_DEEP:     $(CADDY_DEP_BIN_DEEP)"
+	@echo "CADDY_DEP_BIN:          $(CADDY_DEP_BIN)"
 
 	@echo "CADDY_DEP_REPO:         $(CADDY_DEP_REPO)"
 	@echo "CADDY_DEP_REPO_URL:     $(CADDY_DEP_REPO_URL)"
@@ -115,6 +119,8 @@ caddy-dep-template: base-dep-init
 
 caddy-dep-del:
 	rm -f $(CADDY_DEP_WHICH)
+	
+
 
 caddy-dep: 
 	@echo ""
@@ -135,7 +141,7 @@ caddy-dep-single: caddy-dep-template
 	@echo ""
 	$(CADDY_GO_INSTALL_CMD) $(CADDY_DEP_MOD_DEEP)@$(CADDY_DEP_VERSION)
 	@echo ""
-	mv $(GOPATH)/bin/$(CADDY_DEP_BIN_DEEP) $(BASE_CWD_DEP)/$(CADDY_DEP_NATIVE)
+	mv $(GOPATH)/bin/$(CADDY_DEP_BIN) $(BASE_CWD_DEP)/$(CADDY_DEP_NATIVE)
 	rm -f $(GOPATH)/bin/$(CADDY_DEP_BIN_DEEP)
 
 caddy-dep-all: caddy-dep-template
@@ -161,28 +167,6 @@ caddy-dep-all: caddy-dep-template
 	cd $(BASE_CWD_DEPTMP) && cd $(CADDY_DEP_REPO_DEEP) && GOOS=windows GOARCH=arm64 $(CADDY_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(CADDY_DEP)_$(BASE_BIN_SUFFIX_WINDOWS_ARM64)
 
 	rm -rf $(BASE_CWD_DEPTMP)
-
-## ONLY use this to work on my fork 
-# https://github.com/caddyserver/caddy
-# https://github.com/caddyserver/caddy/releases/tag/v2.8.4
-# github.com/caddyserver/caddy/v2
-
-CADDY_BASE_SRC_NAME=caddy
-CADDY_BASE_SRC_URL=https://github.com/gedw99/caddy
-CADDY_BASE_SRC_VERSION=master
-
-CADDY_BASE_BIN_NAME=caddy
-CADDY_BASE_BIN_MOD=.
-CADDY_BASE_BIN_ENTRY=cmd/caddy
-
-CADDY_BASE_CMD=BASE_SRC_NAME=$(CADDY_BASE_SRC_NAME) BASE_SRC_URL=$(CADDY_BASE_SRC_URL) BASE_SRC_VERSION=$(CADDY_BASE_SRC_VERSION) BASE_BIN_NAME=$(CADDY_BASE_BIN_NAME) BASE_BIN_MOD=$(CADDY_BASE_BIN_MOD) BASE_BIN_ENTRY=$(CADDY_BASE_BIN_ENTRY)
-
-caddy-src:
-	$(MAKE) $(CADDY_BASE_CMD) base-src
-caddy-bin:
-	$(MAKE) $(CADDY_BASE_CMD) base-bin
-caddy-bin-all:
-	$(MAKE) $(CADDY_BASE_CMD) base-bin-all
 
 ### run 
 # every command does a dep check.

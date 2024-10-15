@@ -59,8 +59,6 @@ nats-cli-print:
 
 nats-cli-dep-template: base-dep-init
 	@echo ""
-
-
 	@echo ""
 	@echo "-version"
 	rm -rf $(BASE_MAKE_IMPORT)/$(NATS_CLI_DEP_META)
