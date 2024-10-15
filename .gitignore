@@ -5,14 +5,6 @@ __debug
 .bin
 .data
 .dep
+.src
 .pack
 
-
-minio
-mc
-runner
-cli
-cli
-cli
-cli
-cli
