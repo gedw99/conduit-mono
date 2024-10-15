@@ -73,7 +73,7 @@ MAKE will use gh cli, to pump out binaries. It gives better control.
 
 ## Doc
 
-MAKE will use Hugo to pump out docs to github pages.
+MAKE will use Hugo to pump out docs to github pages with binary download links to the github releases.
 
 ## DEPLOY
 
