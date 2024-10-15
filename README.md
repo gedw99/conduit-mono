@@ -4,26 +4,60 @@ https://github.com/gedw99/conduit-mono
 
 Just to make it easier and quicker to work with conduit.
 
+
+If you hit any problems, create an issue, with any debug info. 
+This is tested mostly on Mac, and in CI on Mac, Linux and Windows.
+
 ## Setup
 
-https://github.com/gedw99/conduit-mono/blob/main/Makefile#L9
+Create a base_dev.env, based on base.dev.
 
-Create a base_dev.env, based on base.dev
+Ensure your ssh keys are loaded in the .ssh config.
 
-This will then use your SSH keys and ensure they are using for git, deployment etc.
+The system will then use your SSH keys and ensure they are used for git signing, deployment etc.
+
+Check it with:
+
+```sh
+make base-src-sign-print
+
+
+- bin
+BASE_SRC_SIGNING_BIN_NAME:      smimesign
+BASE_SRC_SIGNING_BIN_WHICH:     /opt/homebrew/bin/smimesign
+
+
+- config
+BASE_SRC_SIGNING_CONFIG:        /Users/apple/.gitconfig
+BASE_SRC_SIGNING_CONFIG_LOCAL:  /Users/apple/workspace/go/src/github.com/gedw99/conduit-mono/.git/config
+
+
+- var
+
+BASE_SRC_SIGNING_USER_NAME:     gedw99
+BASE_SRC_SIGNING_USER_EMAIL:    gedw99@gmail.com
+
+BASE_SRC_SIGNING_KEY_CONFIG:    /Users/apple/.ssh/config
+BASE_SRC_SIGNING_KEY_PRIV:      /Users/apple/.ssh/gedw99_github.com
+BASE_SRC_SIGNING_KEY:           /Users/apple/.ssh/gedw99_github.com.pub
+BASE_SRC_SIGNING_PROGRAM:       ssh
+BASE_SRC_SIGNING_FORMAT:        ssh
+
+
+```
 
 ## Build
 
-You need make, golang and git.
+You need make, golang and git. The system wil check you have this.
 
-The following will pull all repos, build them.
+Then you need to pull the code, build it and run it.
+
+This will do all of that.
 
 ```sh
 make this
 ```
 
-If you hit any problems, create an issue, with any debug info. 
-This is tested mostly on Mac, and in CI on Mac, Linux and Windows.
 
 ## CI
 
