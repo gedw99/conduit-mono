@@ -19,6 +19,24 @@ Create a base_dev.env, based on base.dev.
 
 Ensure your ssh keys are loaded in the .ssh config.
 
+```sh
+# 1. Make a new key.
+ssh-keygen -t ed25519 -C "gedw99_github.com" -f ~/.ssh/gedw99_github.com
+
+# 2. Add the private key to the ssh agent.
+ssh-add ~/.ssh/gedw99_github.com
+
+# 3. Add the public key to github on the web site
+https://github.com/settings/keys
+
+# 4. List added ssh (if in doubt )
+ssh-add -l 
+
+# 5. Delete ssh key  (if you screw it up )
+ssh-add -d ~/.ssh/gedw99_github.com
+
+```
+
 The system will then use your SSH keys and ensure they are used for git signing, deployment etc.
 
 Check it with:
