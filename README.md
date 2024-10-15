@@ -36,10 +36,25 @@ ssh-add -d ~/.ssh/gedw99_github.com
 
 ```
 
-2. Create a base_dev.env, based on base.dev.
+2. Create a base_dev.env
 
+```sh
+cp ./base.env ./base_dev.env
+```
 
-Check it with:
+The base_dev.env is gitignored. Its your own .env
+
+Fill in the details to match your ssh key and email.
+
+```sh
+BASE_SRC_SIGNING_USER_NAME=gedw99
+BASE_SRC_SIGNING_USER_EMAIL=gedw99@gmail.com
+
+BASE_SRC_SIGNING_KEY_PRIV=$(HOME)/.ssh/gedw99_github.com
+BASE_SRC_SIGNING_KEY=$(HOME)/.ssh/gedw99_github.com.pub
+```
+
+Then, check it works wit :
 
 ```sh
 make base-src-sign-print

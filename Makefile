@@ -23,7 +23,10 @@ BASE_BIN_NAME=.
 BASE_BIN_MOD=.
 BASE_BIN_ENTRY=.
 
-# STATUS: Builds and runs, but needs config setup and testing.
+# STATUS: Builds and runs, but needs config setup and testing of conduit.
+
+this-ssh-check:
+	$(MAKE) base-src-sign-print
 
 
 # git stuff ( for top level control )
@@ -39,11 +42,6 @@ this-git-push:
 
 
 this: this-dep this-src this-bin
-
-### dep
-this-dep-del:
-	# just here for now to make sure base-dep works for everyone.
-	# golang, etc etc
 
 this-dep: help-dep base-dep caddy-dep gh-dep hugo-dep nats-cli-dep nats-server-dep proc-dep
 
