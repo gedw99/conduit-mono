@@ -1,2 +1,6 @@
 # conduit-mono
-mono repo for conduit, because life is short !
+
+https://github.com/gedw99/conduit-mono
+
+Just to make it easier and quicker to work with conduit.
+
