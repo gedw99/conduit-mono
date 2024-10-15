@@ -51,10 +51,10 @@ ssh-add -d ~/.ssh/gedw99_github.com
 2. Create a base_dev.env
 
 ```sh
-cp ./base.env ./base_dev.env
+cp ./base_template.env ./base_dev.env
 ```
 
-The base_dev.env is gitignored. Its your own .env
+The base_dev.env is .gitignored. Its your own .env
 
 Edit your ``` ./base_dev.env ``` to match your ssh key and email.
 

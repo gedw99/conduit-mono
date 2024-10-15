@@ -8,6 +8,7 @@ include $(MK)/base.mk
 include $(MK)/base_dev.env
 
 include $(MK)/caddy.mk
+include $(MK)/flate_cli.mk
 include $(MK)/gh.mk
 include $(MK)/hugo.mk
 include $(MK)/nats_cli.mk
@@ -43,7 +44,7 @@ this-git-push:
 
 this: this-dep this-src this-bin
 
-this-dep: help-dep base-dep caddy-dep gh-dep hugo-dep nats-cli-dep nats-server-dep proc-dep
+this-dep: help-dep base-dep caddy-dep flare-cli-dep gh-dep hugo-dep nats-cli-dep nats-server-dep proc-dep
 
 ### src
 
