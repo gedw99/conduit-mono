@@ -8,6 +8,8 @@ include $(MK)/base.mk
 # your overrides
 include $(MK)/base_dev.env
 
+include $(MK)/gh.mk
+
 
 BASE_SRC_NAME=conduit-mono
 BASE_SRC_URL=https://github.com/gedw99/conduit-mono
@@ -39,7 +41,7 @@ this-dep-del:
 	# just here for now to make sure base-dep works for everyone.
 	# golang, etc etc
 
-this-dep: help-dep base-dep
+this-dep: help-dep base-dep gh-dep
 
 ### src
 
@@ -50,6 +52,9 @@ SRC_CONDUIT_PROCESSOR_EXAMPLE=conduitio__conduit_processor_example
 SRC_CONDUIT_SCHEMA_REGISTRY=conduitio__conduit_schema_registry
 SRC_CONDUIT_LAB_CONNECT_GOOGLE_SHEET=conduitio-labs__conduit_connector_google_sheets
 
+SRC_NICKCHOMNEY_CONNECT_SURREAL=nickchomey__conduit_connector_surrealdb
+
+
 this-src: 
 	cd $(SRC_CONDUIT) && $(MAKE) this-src
 	cd $(SRC_CONDUIT_CONNECT_FILE) && $(MAKE) this-src
@@ -57,6 +62,8 @@ this-src:
 	cd $(SRC_CONDUIT_PROCESSOR_EXAMPLE) && $(MAKE) this-src
 	cd $(SRC_CONDUIT_SCHEMA_REGISTRY) && $(MAKE) this-src
 	cd $(SRC_CONDUIT_LAB_CONNECT_GOOGLE_SHEET) && $(MAKE) this-src
+
+	cd $(SRC_NICKCHOMNEY_CONNECT_SURREAL) && $(MAKE) this-src
 
 ### bin
 
@@ -68,6 +75,7 @@ this-bin:
 	cd $(SRC_CONDUIT_SCHEMA_REGISTRY) && $(MAKE) this-bin
 	cd $(SRC_CONDUIT_LAB_CONNECT_GOOGLE_SHEET) && $(MAKE) this-bin
 
+	cd $(SRC_NICKCHOMNEY_CONNECT_SURREAL) && $(MAKE) this-bin
 ### run
 
 this-run: 

@@ -4,9 +4,8 @@ https://github.com/gedw99/conduit-mono
 
 Just to make it easier and quicker to work with conduit.
 
-## Repos
+## Build
 
-https://github.com/orgs/ConduitIO/repositories
+You need make, golang and git.
 
-https://github.com/orgs/conduitio-labs/repositories
 
