@@ -20,12 +20,10 @@ We first need to ensue you are using ssh keys, so that:
 - all git commits are verified commits
 - all deployments are verified
 
-Its pretty easy..
+If you already have ssh keys setup, just move on to step 2.
 
 
 1. Ensure your ssh keys are setup on your laptop and in github. 
-
-If you already have ssh keys setup, just move on to step 2.
 
 In the example below, "gedw99" with your github handle.
 
