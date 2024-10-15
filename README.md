@@ -19,10 +19,10 @@ So so not  change them :)  Make an Issue and we work it out.
 1. Ensure your ssh keys are loaded in the .ssh config and the public get in github.
 
 ```sh
-# 1. Make a new key.
+# 1. Make a new key
 ssh-keygen -t ed25519 -C "gedw99_github.com" -f ~/.ssh/gedw99_github.com
 
-# 2. Add the private key to the ssh agent.
+# 2. Add the private key to the ssh agent
 ssh-add ~/.ssh/gedw99_github.com
 
 # 3. Add the public key to github on the web site
