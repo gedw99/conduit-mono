@@ -8,6 +8,8 @@ Just to make it easier and quicker to work with conduit.
 If you hit any problems, create an issue, with any debug info. 
 This is tested mostly on Mac, and in CI on Mac, Linux and Windows.
 
+NOTE: all files in the root of this repo are replicated in from global system. 
+
 ## Setup
 
 Create a base_dev.env, based on base.dev.
