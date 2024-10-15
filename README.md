@@ -116,7 +116,7 @@ make this
 
 ## CI
 
-The generic Github CI workflow will be added. This calls Makefile, just like you do on your laptop. There is NO need to add anything else to the Github CI, as Make is perfectly.
+The generic Github CI workflow will be added. This calls the Makefile, just like you do on your laptop. There is NO need to add anything else to the Github CI, as Make can do it all.
 
 ## DIST
 
@@ -124,7 +124,7 @@ MAKE will use gh cli, to pump out binaries. It gives better control.
 
 ## Doc
 
-MAKE will use Hugo to pump out docs to github pages with binary download links to the github releases.
+MAKE will use Hugo to pump out docs to github pages with binary download links pointing to the github releases.
 
 ## DEPLOY
 
