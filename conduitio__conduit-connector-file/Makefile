@@ -16,6 +16,8 @@ BASE_MAKE_IMPORT=$(PWD)/..
 MK=$(BASE_MAKE_IMPORT)
 include $(MK)/help.mk
 include $(MK)/base.mk
+# your overrides
+#include $(MK)/base_dev.env
 
 include $(MK)/caddy.mk
 include $(MK)/hugo.mk
@@ -28,8 +30,8 @@ include $(PWD)/this.mk
 
 BASE_SRC_NAME=conduit-connector-file
 BASE_SRC_URL=https://github.com/ConduitIO/conduit-connector-file
-# https://github.com/ConduitIO/conduit-connector-file/releases/tag/v0.7.0
-BASE_SRC_VERSION=v0.7.0
+# https://github.com/ConduitIO/conduit-connector-file/releases/tag/v0.8.0
+BASE_SRC_VERSION=v0.8.0
 
 BASE_BIN_NAME=conduit_connector_file
 BASE_BIN_MOD=.

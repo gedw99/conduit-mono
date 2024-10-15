@@ -25,8 +25,8 @@ include $(PWD)/this.mk
 
 BASE_SRC_NAME=conduit
 BASE_SRC_URL=https://github.com/ConduitIO/conduit
-# https://github.com/ConduitIO/conduit/releases/tag/v0.11.1
-BASE_SRC_VERSION=v0.11.1
+# https://github.com/ConduitIO/conduit/releases/tag/v0.12.1
+BASE_SRC_VERSION=v0.12.1
 #BASE_SRC_VERSION=build-scripts
 
 BASE_BIN_NAME=conduit

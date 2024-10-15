@@ -573,19 +573,13 @@ base-dep-wgot:
 	@echo ""
 	@echo "wgot dep"
 	@echo ""
-# wgot
-# https://github.com/melbahja/got
-	#$(BASE_DEP_BIN_GO_NAME) install github.com/melbahja/got/cmd/got@latest
-	#$(BASE_DEP_BIN_GO_NAME) install github.com/melbahja/got/cmd/wgot@latest
 
-# nicer fork ?
-# https://github.com/bitrise-io/got
+    # https://github.com/bitrise-io/got
 	$(BASE_DEP_BIN_GO_NAME) install github.com/bitrise-io/got/cmd/got@latest
 	$(BASE_DEP_BIN_GO_NAME) install github.com/bitrise-io/got/cmd/wgot@latest
 
 	# almsot ready
 	#go install github.com/bitrise-io/got/cmd/wgot@chunk-interrupt
-
 
 base-dep-tree-del:
 	rm -rf $(BASE_DEP_BIN_TREE_WHICH)
@@ -753,7 +747,7 @@ base-src-status:
 base-src-pull:
 	cd $(BASE_SRC) && $(BASE_DEP_BIN_GIT_NAME) pull
 
-SRC_PUSH_MESSAGE :=
+SRC_PUSH_MESSAGE:=
 
 ## base-src-push
 base-src-push: base-src-sign-set

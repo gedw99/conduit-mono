@@ -45,7 +45,7 @@ this-dep: help-dep base-dep
 
 SRC_CONDUIT=conduitio__conduit
 SRC_CONDUIT_CONNECT_FILE=conduitio__conduit-connector-file
-SRC_CONDUIT_CONNECT_S3=conduit-connector-s3
+SRC_CONDUIT_CONNECT_S3=conduitio__conduit-connector-s3
 SRC_CONDUIT_SCHEMA_REGISTRY=conduitio__conduit-schema-registry
 
 this-src: 
