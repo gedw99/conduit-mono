@@ -46,12 +46,14 @@ this-dep: help-dep base-dep
 SRC_CONDUIT=conduitio__conduit
 SRC_CONDUIT_CONNECT_FILE=conduitio__conduit-connector-file
 SRC_CONDUIT_CONNECT_S3=conduitio__conduit-connector-s3
+SRC_CONDUIT_PROCESSOR_EXAMPLE=conduit-processor-example
 SRC_CONDUIT_SCHEMA_REGISTRY=conduitio__conduit-schema-registry
 
 this-src: 
 	cd $(SRC_CONDUIT) && $(MAKE) this-src
 	cd $(SRC_CONDUIT_CONNECT_FILE) && $(MAKE) this-src
 	cd $(SRC_CONDUIT_CONNECT_S3) && $(MAKE) this-src
+	cd $(SRC_CONDUIT_PROCESSOR_EXAMPLE) && $(MAKE) this-src
 	cd $(SRC_CONDUIT_SCHEMA_REGISTRY) && $(MAKE) this-src
 
 ### bin
@@ -60,6 +62,7 @@ this-bin:
 	cd $(SRC_CONDUIT) && $(MAKE) this-bin
 	cd $(SRC_CONDUIT_CONNECT_FILE) && $(MAKE) this-bin
 	cd $(SRC_CONDUIT_CONNECT_S3) && $(MAKE) this-bin
+	cd $(SRC_CONDUIT_PROCESSOR_EXAMPLE) && $(MAKE) this-bin
 	cd $(SRC_CONDUIT_SCHEMA_REGISTRY) && $(MAKE) this-bin
 
 ### run
