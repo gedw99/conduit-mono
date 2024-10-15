@@ -12,12 +12,12 @@ MK=$(BASE_MAKE_IMPORT)
 include $(MK)/help.mk
 include $(MK)/base.mk
 
-include $(MK)/caddy.mk
-include $(MK)/hugo.mk
-include $(MK)/nats_cli.mk
-include $(MK)/nats_server.mk
-include $(MK)/proc.mk
-include $(MK)/template.mk
+#include $(MK)/caddy.mk
+#include $(MK)/hugo.mk
+#include $(MK)/nats_cli.mk
+#include $(MK)/nats_server.mk
+#include $(MK)/proc.mk
+#include $(MK)/template.mk
 
 BASE_SRC_NAME=conduit-schema-registry
 BASE_SRC_URL=https://github.com/ConduitIO/conduit-schema-registry

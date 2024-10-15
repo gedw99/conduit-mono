@@ -1,4 +1,4 @@
-# Compiles. 
+
 
 # MUST use this name.
 
@@ -26,22 +26,26 @@ include $(MK)/base.mk
 
 include $(PWD)/this.mk
 
-BASE_SRC_NAME=conduit-connector-s3
-BASE_SRC_URL=https://github.com/ConduitIO/conduit-connector-s3
-# https://github.com/ConduitIO/conduit-connector-s3/releases/tag/v0.7.0
-BASE_SRC_VERSION=v0.7.0
-#BASE_SRC_VERSION=build-scripts
+include .env
 
-BASE_BIN_NAME=conduit_connector_s3
+BASE_SRC_NAME=conduit-connector-google-sheets
+BASE_SRC_URL=https://github.com/conduitio-labs/conduit-connector-google-sheets
+# https://github.com/conduitio-labs/conduit-connector-google-sheets/releases/tag/v0.3.0
+# the tagged version will not build. Main version works so use that.
+#BASE_SRC_VERSION=v0.3.0
+BASE_SRC_VERSION=main
+
+BASE_BIN_NAME=conduit_connector_google_sheets
 BASE_BIN_MOD=.
 BASE_BIN_ENTRY=cmd/connector
 
+# STATUS: builds but need to test 
 
 this: this-dep this-src this-bin
 
 ### dep
 
-this-dep: help-dep base-dep #caddy-dep hugo-dep nats-cli-dep nats-server-dep proc-dep template-dep
+this-dep: help-dep base-dep proc-dep
 
 ### src
 
@@ -50,6 +54,13 @@ this-src: base-src
 ### bin
 
 this-bin: base-bin
+# fails due to it reaching out to buf conenct at build time...
+
+### run
+
+this-run: base-run
+
+
 
 
 
