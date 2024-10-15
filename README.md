@@ -23,7 +23,7 @@ We first need to ensue you are using ssh keys, so that:
 Its pretty easy..
 
 
-1. Ensure your ssh keys are loaded in the .ssh config and the public get in github.
+1. Ensure your ssh keys are setup on your laptop and in github. If you already have ssh keys setup, just move on to step 2.
 
 ```sh
 # 1. Make a new key
