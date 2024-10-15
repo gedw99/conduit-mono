@@ -1,0 +1,11 @@
+# runner_config_procfile_caddy
+
+workdir: .
+observe: *.go *.js
+ignore: /vendor
+make-bin: make this-bin
+make-run: make this-run
+nats-1: restart=fail make nats-run
+nats-2: restart=fail make nats-run
+nats-3: restart=fail make nats-run
+

@@ -1,0 +1,17 @@
+### NATS config file
+
+listen: 127.0.0.1:4222
+
+jetstream {
+    max_mem: 1G
+    max_file: 100G
+}
+
+authorization: {
+    users: [
+        {user: user, password: "$2a$11$lfIElYSRpcRnutp02RkGBui/0CcB8TepPj5A50dx4Ibsp2DuU4R7G"},
+    ]
+}
+
+
+	

@@ -8,7 +8,10 @@ include $(MK)/base.mk
 # your overrides
 include $(MK)/base_dev.env
 
+include $(MK)/caddy.mk
 include $(MK)/gh.mk
+include $(MK)/hugo.mk
+
 
 
 BASE_SRC_NAME=conduit-mono
@@ -41,7 +44,7 @@ this-dep-del:
 	# just here for now to make sure base-dep works for everyone.
 	# golang, etc etc
 
-this-dep: help-dep base-dep gh-dep
+this-dep: help-dep base-dep gh-dep hugo-dep
 
 ### src
 
@@ -80,4 +83,7 @@ this-bin:
 
 this-run: 
 	cd $(SRC_CONDUIT) && $(MAKE) this-run
+
+this-hugo:
+	$(MAKE) hugo-print
 

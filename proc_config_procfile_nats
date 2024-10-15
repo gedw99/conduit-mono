@@ -1,0 +1,7 @@
+# runner_config_procfile_caddy
+
+workdir: .
+observe: *.go *.js
+ignore: /vendor
+make-nats: restart=fail make this-nats
+
