@@ -38,21 +38,30 @@ this: this-dep this-src this-bin
 this-dep-del:
 	# just here for now to make sure base-dep works for everyone.
 	# golang, etc etc
-	
+
 this-dep: help-dep base-dep
 
 ### src
 
+SRC_CONDUIT=conduitio__conduit
+SRC_CONDUIT_CONNECT_FILE=conduitio__conduit-connector-file
+SRC_CONDUIT_SCHEMA_REGISTRY=conduitio__conduit-schema-registry
+
 this-src: 
-	cd conduitio__conduit && $(MAKE) this-src
-	
+	cd $(SRC_CONDUIT) && $(MAKE) this-src
+	cd $(SRC_CONDUIT_CONNECT_FILE) && $(MAKE) this-src
+	cd $(SRC_CONDUIT_SCHEMA_REGISTRY) && $(MAKE) this-src
+
 ### bin
 
 this-bin: 
-	cd conduitio__conduit && $(MAKE) this-bin
+
+	cd $(SRC_CONDUIT) && $(MAKE) this-bin
+	cd $(SRC_CONDUIT_CONNECT_FILE) && $(MAKE) this-bin
+	cd $(SRC_CONDUIT_SCHEMA_REGISTRY) && $(MAKE) this-bin
 
 ### run
 
 this-run: 
-	cd conduitio__conduit && $(MAKE) this-run
+	cd $(SRC_CONDUIT) && $(MAKE) this-run
 
