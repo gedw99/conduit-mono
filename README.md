@@ -15,9 +15,8 @@ So so not  change them :)  Make an Issue and we work it out.
 
 ## Setup
 
-Create a base_dev.env, based on base.dev.
 
-Ensure your ssh keys are loaded in the .ssh config.
+1. Ensure your ssh keys are loaded in the .ssh config and the public get in github.
 
 ```sh
 # 1. Make a new key.
@@ -37,7 +36,8 @@ ssh-add -d ~/.ssh/gedw99_github.com
 
 ```
 
-The system will then use your SSH keys and ensure they are used for git signing, deployment etc.
+2. Create a base_dev.env, based on base.dev.
+
 
 Check it with:
 
@@ -68,6 +68,9 @@ BASE_SRC_SIGNING_FORMAT:        ssh
 
 
 ```
+
+The system will then use your SSH keys and ensure they are used for git signing, deployment etc.
+
 
 ## Build
 
