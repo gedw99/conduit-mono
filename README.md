@@ -66,7 +66,7 @@ BASE_SRC_SIGNING_KEY_PRIV=$(HOME)/.ssh/gedw99_github.com
 BASE_SRC_SIGNING_KEY=$(HOME)/.ssh/gedw99_github.com.pub
 ```
 
-Then, check it works wit :
+Then, check it works:
 
 ```sh
 make base-src-sign-print
@@ -85,7 +85,7 @@ BASE_SRC_SIGNING_CONFIG_LOCAL:  /Users/apple/workspace/go/src/github.com/gedw99/
 - var
 
 BASE_SRC_SIGNING_USER_NAME:     gedw99
-BASE_SRC_SIGNING_USER_EMAIL:    gedw99@gmail.com
+BASE_SRC_SIGNING_USER_EMAIL:    gedw99@bling.com
 
 BASE_SRC_SIGNING_KEY_CONFIG:    /Users/apple/.ssh/config
 BASE_SRC_SIGNING_KEY_PRIV:      /Users/apple/.ssh/gedw99_github.com
