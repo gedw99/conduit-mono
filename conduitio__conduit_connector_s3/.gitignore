@@ -5,6 +5,8 @@ __debug
 .bin
 .data
 .dep
+.deptmp
 .pack
+.src
 
 

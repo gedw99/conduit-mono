@@ -13,12 +13,12 @@ include $(MK)/base.mk
 # your overrides
 include $(MK)/base_dev.env
 
-include $(MK)/caddy.mk
-include $(MK)/hugo.mk
-include $(MK)/nats_cli.mk
-include $(MK)/nats_server.mk
-include $(MK)/proc.mk
-include $(MK)/template.mk
+#include $(MK)/caddy.mk
+#include $(MK)/hugo.mk
+#include $(MK)/nats_cli.mk
+#include $(MK)/nats_server.mk
+#include $(MK)/proc.mk
+#include $(MK)/template.mk
 
 include $(PWD)/this.mk
 
@@ -39,7 +39,7 @@ this: this-dep this-src this-bin
 
 ### dep
 
-this-dep: help-dep base-dep proc-dep
+this-dep: help-dep base-dep #proc-dep
 
 ### src
 

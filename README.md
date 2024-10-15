@@ -50,9 +50,11 @@ BASE_SRC_SIGNING_FORMAT:        ssh
 
 You need make, golang and git. The system wil check you have this.
 
-Then you need to pull the code, build it and run it.
+Then you need to pull the dependencies, src code from each repo, build it and run it.
 
-This will do all of that.
+It will not touch anything on your hard disk outside this repo itself.
+
+This will do all of that. All Dependencies will only be build once.
 
 ```sh
 make this

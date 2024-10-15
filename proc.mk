@@ -112,57 +112,54 @@ else
 	@echo "$(PROC_DEP) dep check: passed"
 endif
 
+
+proc-dep-start:
+	rm -rf $(BASE_CWD_DEPTMP)
+	mkdir -p $(BASE_CWD_DEPTMP)
+
+	cd $(BASE_CWD_DEPTMP) && $(BASE_DEP_BIN_GIT_NAME) clone $(PROC_DEP_REPO_URL) -b $(PROC_DEP_VERSION)
+	cd $(BASE_CWD_DEPTMP) && echo $(PROC_DEP_REPO) >> .gitignore
+	cd $(BASE_CWD_DEPTMP) && touch go.work
+	cd $(BASE_CWD_DEPTMP) && go work use $(PROC_DEP_REPO)
+proc-dep-end:
+	rm -rf $(BASE_CWD_DEPTMP)
+
 proc-dep-single: proc-dep-template
-	@echo ""
-	$(PROC_GO_INSTALL_CMD) $(PROC_DEP_MOD_DEEP)@$(PROC_DEP_VERSION)
-	@echo ""
-	mv $(GOPATH)/bin/$(PROC_DEP_BIN) $(BASE_CWD_DEP)/$(PROC_DEP_NATIVE)
-	rm -f $(GOPATH)/bin/$(PROC_DEP_BIN)
-	@echo ""
+	$(MAKE) proc-dep-start
+
+ifeq ($(BASE_OS_NAME),darwin)
+	@echo "--- darwin ---"
+	$(MAKE) proc-dep-darwin
+endif
+ifeq ($(BASE_OS_NAME),linux)
+	@echo "--- linux ---"
+	$(MAKE) proc-dep-linux
+endif
+ifeq ($(BASE_OS_NAME),windows)
+	@echo "--- windows ---"
+	$(MAKE) proc-dep-windows
+endif
+
+	$(MAKE) proc-dep-end
 
 proc-dep-all: proc-dep-template
-	@echo ""
-	rm -rf $(PROC_DEP_REPO)
-	$(BASE_DEP_BIN_GIT_NAME) clone $(PROC_DEP_REPO_URL) -b $(PROC_DEP_VERSION)
-	@echo $(PROC_DEP_REPO) >> .gitignore
-	touch go.work
-	go work use $(PROC_DEP_REPO)
+	$(MAKE) proc-dep-start
 
-	@echo ""
-	cd $(PROC_DEP_REPO_DEEP) && GOOS=darwin GOARCH=amd64 $(PROC_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(PROC_DEP)_$(BASE_BIN_SUFFIX_DARWIN_AMD64)
-	cd $(PROC_DEP_REPO_DEEP) && GOOS=darwin GOARCH=arm64 $(PROC_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(PROC_DEP)_$(BASE_BIN_SUFFIX_DARWIN_ARM64)
+	$(MAKE) proc-dep-darwin
+	$(MAKE) proc-dep-linux
+	$(MAKE) proc-dep-windows
+
+	$(MAKE) proc-dep-end	
 	
-	cd $(PROC_DEP_REPO_DEEP) && GOOS=linux GOARCH=amd64 $(PROC_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(PROC_DEP)_$(BASE_BIN_SUFFIX_LINUX_AMD64)
-	cd $(PROC_DEP_REPO_DEEP) && GOOS=linux GOARCH=arm64 $(PROC_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(PROC_DEP)_$(BASE_BIN_SUFFIX_LINUX_ARM64)
-	
-	cd $(PROC_DEP_REPO_DEEP) && GOOS=windows GOARCH=amd64 $(PROC_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(PROC_DEP)_$(BASE_BIN_SUFFIX_WINDOWS_AMD64)
-	cd $(PROC_DEP_REPO_DEEP) && GOOS=windows GOARCH=arm64 $(PROC_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(PROC_DEP)_$(BASE_BIN_SUFFIX_WINDOWS_ARM64)
-
-	rm -rf $(PROC_DEP_REPO)
-	rm -f go.work
-	rm -f go.work.sum
-
-
-
-## ONLY use this to work on my fork and then push back
-
-PROC_BASE_SRC_NAME=runner
-PROC_BASE_SRC_URL=https://github.com/gedw99/runner
-PROC_BASE_SRC_VERSION=master
-
-PROC_BASE_BIN_NAME=proc
-PROC_BASE_BIN_MOD=.
-PROC_BASE_BIN_ENTRY=.
-
-PROC_BASE_CMD=BASE_SRC_NAME=$(PROC_BASE_SRC_NAME) BASE_SRC_URL=$(PROC_BASE_SRC_URL) BASE_SRC_VERSION=$(PROC_BASE_SRC_VERSION) BASE_BIN_NAME=$(PROC_BASE_BIN_NAME) BASE_BIN_MOD=$(PROC_BASE_BIN_MOD) BASE_BIN_ENTRY=$(PROC_BASE_BIN_ENTRY)
-
-proc-src:
-	$(MAKE) $(PROC_BASE_CMD) base-src
-proc-bin:
-	$(MAKE) $(PROC_BASE_CMD) base-bin
-proc-bin-all:
-	$(MAKE) $(PROC_BASE_CMD) base-bin-all
-
+proc-dep-darwin:
+	cd $(BASE_CWD_DEPTMP) && cd $(PROC_DEP_REPO_DEEP) && GOOS=darwin GOARCH=amd64 $(PROC_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(PROC_DEP)_$(BASE_BIN_SUFFIX_DARWIN_AMD64)
+	cd $(BASE_CWD_DEPTMP) && cd $(PROC_DEP_REPO_DEEP) && GOOS=darwin GOARCH=arm64 $(PROC_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(PROC_DEP)_$(BASE_BIN_SUFFIX_DARWIN_ARM64)
+proc-dep-linux:
+	cd $(BASE_CWD_DEPTMP) && cd $(PROC_DEP_REPO_DEEP) && GOOS=linux GOARCH=amd64 $(PROC_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(PROC_DEP)_$(BASE_BIN_SUFFIX_LINUX_AMD64)
+	cd $(BASE_CWD_DEPTMP) && cd $(PROC_DEP_REPO_DEEP) && GOOS=linux GOARCH=arm64 $(PROC_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(PROC_DEP)_$(BASE_BIN_SUFFIX_LINUX_ARM64)
+proc-dep-windows:
+	cd $(BASE_CWD_DEPTMP) && cd $(PROC_DEP_REPO_DEEP) && GOOS=windows GOARCH=amd64 $(PROC_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(PROC_DEP)_$(BASE_BIN_SUFFIX_WINDOWS_AMD64)
+	cd $(BASE_CWD_DEPTMP) && cd $(PROC_DEP_REPO_DEEP) && GOOS=windows GOARCH=arm64 $(PROC_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(PROC_DEP)_$(BASE_BIN_SUFFIX_WINDOWS_ARM64)
 
 
 ### run

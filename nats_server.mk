@@ -110,38 +110,59 @@ else
 	@echo "$(NATS_SERVER_DEP) dep check: passed"
 endif
 
+nats-server-dep-start:
+	rm -rf $(BASE_CWD_DEPTMP)
+	mkdir -p $(BASE_CWD_DEPTMP)
+
+	cd $(BASE_CWD_DEPTMP) && $(BASE_DEP_BIN_GIT_NAME) clone $(NATS_SERVER_DEP_REPO_URL) -b $(NATS_SERVER_DEP_VERSION)
+	cd $(BASE_CWD_DEPTMP) && echo $(NATS_SERVER_DEP_REPO) >> .gitignore
+	cd $(BASE_CWD_DEPTMP) && touch go.work
+	cd $(BASE_CWD_DEPTMP) && go work use $(NATS_SERVER_DEP_REPO)
+nats-server-dep-end:
+	rm -rf $(BASE_CWD_DEPTMP)
+
 ## nats-server-dep
 nats-server-dep-single: nats-server-dep-template
-	@echo ""
-	$(NATS_SERVER_GO_INSTALL_CMD) $(NATS_SERVER_DEP_MOD_DEEP)@$(NATS_SERVER_DEP_VERSION)
-	@echo ""
-	mv $(GOPATH)/bin/$(NATS_SERVER_DEP_BIN) $(BASE_CWD_DEP)/$(NATS_SERVER_DEP_NATIVE)
-	rm -f $(GOPATH)/bin/$(NATS_SERVER_DEP)
+
+	$(MAKE) nats-server-dep-start
+
+ifeq ($(BASE_OS_NAME),darwin)
+	@echo "--- darwin ---"
+	$(MAKE) nats-server-dep-darwin
+endif
+ifeq ($(BASE_OS_NAME),linux)
+	@echo "--- linux ---"
+	$(MAKE) nats-server-dep-linux
+endif
+ifeq ($(BASE_OS_NAME),windows)
+	@echo "--- windows ---"
+	$(MAKE) nats-server-dep-windows
+endif
+
+	$(MAKE) nats-server-dep-end
+
 
 ## nats-server-dep-all
 nats-server-dep-all: nats-server-dep-template
-	@echo ""
-	rm -rf $(NATS_SERVER_DEP_REPO)
-	$(BASE_DEP_BIN_GIT_NAME) clone $(NATS_SERVER_DEP_REPO_URL) -b $(NATS_SERVER_DEP_VERSION)
-	@echo $(NATS_SERVER_DEP_REPO) >> .gitignore
-	touch go.work
-	go work use $(NATS_SERVER_DEP_REPO)
-
-	@echo ""
-	cd $(NATS_SERVER_DEP_REPO_DEEP) && GOOS=darwin GOARCH=amd64 $(NATS_SERVER_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(NATS_SERVER_DEP)_$(BASE_BIN_SUFFIX_DARWIN_AMD64)
-	cd $(NATS_SERVER_DEP_REPO_DEEP) && GOOS=darwin GOARCH=arm64 $(NATS_SERVER_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(NATS_SERVER_DEP)_$(BASE_BIN_SUFFIX_DARWIN_ARM64)
 	
-	cd $(NATS_SERVER_DEP_REPO_DEEP) && GOOS=linux GOARCH=amd64 $(NATS_SERVER_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(NATS_SERVER_DEP)_$(BASE_BIN_SUFFIX_LINUX_AMD64)
-	cd $(NATS_SERVER_DEP_REPO_DEEP) && GOOS=linux GOARCH=arm64 $(NATS_SERVER_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(NATS_SERVER_DEP)_$(BASE_BIN_SUFFIX_LINUX_ARM64)
+	$(MAKE) nats-server-dep-start
+
+	$(MAKE) nats-server-dep-darwin
+	$(MAKE) nats-server-dep-linux
+	$(MAKE) nats-server-dep-windows
+
+	$(MAKE) nats-server-dep-end
 	
-	cd $(NATS_SERVER_DEP_REPO_DEEP) && GOOS=windows GOARCH=amd64 $(NATS_SERVER_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(NATS_SERVER_DEP)_$(BASE_BIN_SUFFIX_WINDOWS_AMD64)
-	cd $(NATS_SERVER_DEP_REPO_DEEP) && GOOS=windows GOARCH=arm64 $(NATS_SERVER_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(NATS_SERVER_DEP)_$(BASE_BIN_SUFFIX_WINDOWS_ARM64)
+nats-server-dep-darwin:
+	cd $(BASE_CWD_DEPTMP) && cd $(NATS_SERVER_DEP_REPO_DEEP) && GOOS=darwin GOARCH=amd64 $(NATS_SERVER_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(NATS_SERVER_DEP)_$(BASE_BIN_SUFFIX_DARWIN_AMD64)
+	cd $(BASE_CWD_DEPTMP) && cd $(NATS_SERVER_DEP_REPO_DEEP) && GOOS=darwin GOARCH=arm64 $(NATS_SERVER_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(NATS_SERVER_DEP)_$(BASE_BIN_SUFFIX_DARWIN_ARM64)
+nats-server-dep-linux:
+	cd $(BASE_CWD_DEPTMP) && cd $(NATS_SERVER_DEP_REPO_DEEP) && GOOS=linux GOARCH=amd64 $(NATS_SERVER_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(NATS_SERVER_DEP)_$(BASE_BIN_SUFFIX_LINUX_AMD64)
+	cd $(BASE_CWD_DEPTMP) && cd $(NATS_SERVER_DEP_REPO_DEEP) && GOOS=linux GOARCH=arm64 $(NATS_SERVER_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(NATS_SERVER_DEP)_$(BASE_BIN_SUFFIX_LINUX_ARM64)
+nats-server-dep-windows:
+	cd $(BASE_CWD_DEPTMP) && cd $(NATS_SERVER_DEP_REPO_DEEP) && GOOS=windows GOARCH=amd64 $(NATS_SERVER_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(NATS_SERVER_DEP)_$(BASE_BIN_SUFFIX_WINDOWS_AMD64)
+	cd $(BASE_CWD_DEPTMP) && cd $(NATS_SERVER_DEP_REPO_DEEP) && GOOS=windows GOARCH=arm64 $(NATS_SERVER_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(NATS_SERVER_DEP)_$(BASE_BIN_SUFFIX_WINDOWS_ARM64)
 
-	rm -rf $(NATS_SERVER_DEP_REPO)
-	rm -f go.work
-
-	touch go.work
-	go work use $(OS_MOD)
 
 
 ### run

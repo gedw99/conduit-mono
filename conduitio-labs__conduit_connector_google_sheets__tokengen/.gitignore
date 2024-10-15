@@ -1,2 +1,15 @@
-credentials.json
+credentials*
 dummy*
+
+# dlv debug code
+__debug
+
+# . folders
+.bin
+.data
+.dep
+.deptmp
+.pack
+.src
+
+

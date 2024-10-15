@@ -44,7 +44,7 @@ hugo-print:
 	@echo ""
 	@echo "- dep"
 	@echo "HUGO_DEP:              $(HUGO_DEP)"
-	@echo "HUGO_DEP_BIN_DEEP:          $(HUGO_DEP_BIN_DEEP)"
+	@echo "HUGO_DEP_BIN_DEEP:     $(HUGO_DEP_BIN_DEEP)"
 
 	@echo "HUGO_DEP_REPO:         $(HUGO_DEP_REPO)"
 	@echo "HUGO_DEP_REPO_URL:     $(HUGO_DEP_REPO_URL)"
@@ -108,37 +108,56 @@ else
 	@echo ""
 endif
 
+
+hugo-dep-start:
+	rm -rf $(BASE_CWD_DEPTMP)
+	mkdir -p $(BASE_CWD_DEPTMP)
+
+	cd $(BASE_CWD_DEPTMP) && $(BASE_DEP_BIN_GIT_NAME) clone $(HUGO_DEP_REPO_URL) -b $(HUGO_DEP_VERSION)
+	cd $(BASE_CWD_DEPTMP) && echo $(HUGO_DEP_REPO) >> .gitignore
+	cd $(BASE_CWD_DEPTMP) && touch go.work
+	cd $(BASE_CWD_DEPTMP) && go work use $(HUGO_DEP_REPO)
+hugo-dep-end:
+	rm -rf $(BASE_CWD_DEPTMP)
+
 hugo-dep-single: hugo-dep-template
-	@echo ""
-	$(HUGO_GO_INSTALL_CMD) $(HUGO_DEP_MOD_DEEP)@$(HUGO_DEP_VERSION)
-	@echo ""
-	mv $(GOPATH)/bin/$(HUGO_DEP_BIN_DEEP) $(BASE_CWD_DEP)/$(HUGO_DEP_NATIVE)
-	rm -f $(GOPATH)/bin/$(HUGO_DEP_BIN_DEEP)
+
+	$(MAKE) hugo-dep-start
+
+ifeq ($(BASE_OS_NAME),darwin)
+	@echo "--- darwin ---"
+	$(MAKE) hugo-dep-darwin
+endif
+ifeq ($(BASE_OS_NAME),linux)
+	@echo "--- linux ---"
+	$(MAKE) hugo-dep-linux
+endif
+ifeq ($(BASE_OS_NAME),windows)
+	@echo "--- windows ---"
+	$(MAKE) hugo-dep-windows
+endif
+
+	$(MAKE) hugo-dep-end
+	
 
 hugo-dep-all: hugo-dep-template
-	@echo ""
-	rm -rf $(HUGO_DEP_REPO)
-	$(BASE_DEP_BIN_GIT_NAME) clone $(HUGO_DEP_REPO_URL) -b $(HUGO_DEP_VERSION)
-	@echo $(HUGO_DEP_REPO) >> .gitignore
-	touch go.work
-	go work use $(HUGO_DEP_REPO)
+	$(MAKE) hugo-dep-start
 
-	@echo ""
-	cd $(HUGO_DEP_REPO_DEEP) && GOOS=darwin GOARCH=amd64 $(HUGO_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(HUGO_DEP)_$(BASE_BIN_SUFFIX_DARWIN_AMD64)
-	cd $(HUGO_DEP_REPO_DEEP) && GOOS=darwin GOARCH=arm64 $(HUGO_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(HUGO_DEP)_$(BASE_BIN_SUFFIX_DARWIN_ARM64)
-	
-	cd $(HUGO_DEP_REPO_DEEP) && GOOS=linux GOARCH=amd64 $(HUGO_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(HUGO_DEP)_$(BASE_BIN_SUFFIX_LINUX_AMD64)
-	cd $(HUGO_DEP_REPO_DEEP) && GOOS=linux GOARCH=arm64 $(HUGO_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(HUGO_DEP)_$(BASE_BIN_SUFFIX_LINUX_ARM64)
-	
-	cd $(HUGO_DEP_REPO_DEEP) && GOOS=windows GOARCH=amd64 $(HUGO_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(HUGO_DEP)_$(BASE_BIN_SUFFIX_WINDOWS_AMD64)
-	cd $(HUGO_DEP_REPO_DEEP) && GOOS=windows GOARCH=arm64 $(HUGO_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(HUGO_DEP)_$(BASE_BIN_SUFFIX_WINDOWS_ARM64)
+	$(MAKE) hugo-dep-darwin
+	$(MAKE) hugo-dep-linux
+	$(MAKE) hugo-dep-windows
 
-	rm -rf $(HUGO_DEP_REPO)
-	rm -f go.work
-	rm -f go.work.sum
+	$(MAKE) hugo-dep-end	
 
-	#touch go.work
-	#go work use $(OS_MOD)
+hugo-dep-darwin:
+	cd $(BASE_CWD_DEPTMP) && cd $(HUGO_DEP_REPO_DEEP) && GOOS=darwin GOARCH=amd64 $(HUGO_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(HUGO_DEP)_$(BASE_BIN_SUFFIX_DARWIN_AMD64)
+	cd $(BASE_CWD_DEPTMP) && cd $(HUGO_DEP_REPO_DEEP) && GOOS=darwin GOARCH=arm64 $(HUGO_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(HUGO_DEP)_$(BASE_BIN_SUFFIX_DARWIN_ARM64)
+hugo-dep-linux:
+	cd $(BASE_CWD_DEPTMP) && cd $(HUGO_DEP_REPO_DEEP) && GOOS=linux GOARCH=amd64 $(HUGO_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(HUGO_DEP)_$(BASE_BIN_SUFFIX_LINUX_AMD64)
+	cd $(BASE_CWD_DEPTMP) && cd $(HUGO_DEP_REPO_DEEP) && GOOS=linux GOARCH=arm64 $(HUGO_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(HUGO_DEP)_$(BASE_BIN_SUFFIX_LINUX_ARM64)
+hugo-dep-windows:
+	cd $(BASE_CWD_DEPTMP) && cd $(HUGO_DEP_REPO_DEEP) && GOOS=windows GOARCH=amd64 $(HUGO_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(HUGO_DEP)_$(BASE_BIN_SUFFIX_WINDOWS_AMD64)
+	cd $(BASE_CWD_DEPTMP) && cd $(HUGO_DEP_REPO_DEEP) && GOOS=windows GOARCH=arm64 $(HUGO_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(HUGO_DEP)_$(BASE_BIN_SUFFIX_WINDOWS_ARM64)
 
 	
 

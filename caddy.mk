@@ -137,36 +137,60 @@ else
 	@echo "$(CADDY_DEP) dep check: passed"
 endif
 
-caddy-dep-single: caddy-dep-template
-	@echo ""
-	$(CADDY_GO_INSTALL_CMD) $(CADDY_DEP_MOD_DEEP)@$(CADDY_DEP_VERSION)
-	@echo ""
-	mv $(GOPATH)/bin/$(CADDY_DEP_BIN) $(BASE_CWD_DEP)/$(CADDY_DEP_NATIVE)
-	rm -f $(GOPATH)/bin/$(CADDY_DEP_BIN_DEEP)
-
-caddy-dep-all: caddy-dep-template
-	@echo ""
-
+caddy-dep-start:
 	rm -rf $(BASE_CWD_DEPTMP)
 	mkdir -p $(BASE_CWD_DEPTMP)
 
-	
 	cd $(BASE_CWD_DEPTMP) && $(BASE_DEP_BIN_GIT_NAME) clone $(CADDY_DEP_REPO_URL) -b $(CADDY_DEP_VERSION)
 	cd $(BASE_CWD_DEPTMP) && echo $(CADDY_DEP_REPO) >> .gitignore
 	cd $(BASE_CWD_DEPTMP) && touch go.work
 	cd $(BASE_CWD_DEPTMP) && go work use $(CADDY_DEP_REPO)
 
-	@echo ""
+caddy-dep-end:
+	rm -rf $(BASE_CWD_DEPTMP)
+
+caddy-dep-single: caddy-dep-template
+
+	$(MAKE) caddy-dep-start
+
+ifeq ($(BASE_OS_NAME),darwin)
+	@echo "--- darwin ---"
+	$(MAKE) caddy-dep-darwin
+endif
+ifeq ($(BASE_OS_NAME),linux)
+	@echo "--- linux ---"
+	$(MAKE) caddy-dep-linux
+endif
+ifeq ($(BASE_OS_NAME),windows)
+	@echo "--- windows ---"
+	$(MAKE) caddy-dep-windows
+endif
+
+	$(MAKE) caddy-dep-end
+
+caddy-dep-all: caddy-dep-template
+
+	$(MAKE) caddy-dep-start
+	
+	$(MAKE) caddy-dep-darwin
+	$(MAKE) caddy-dep-linux
+	$(MAKE) caddy-dep-windows
+	
+	$(MAKE) caddy-dep-end
+
+caddy-dep-darwin:
 	cd $(BASE_CWD_DEPTMP) && cd $(CADDY_DEP_REPO_DEEP) && GOOS=darwin GOARCH=amd64 $(CADDY_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(CADDY_DEP)_$(BASE_BIN_SUFFIX_DARWIN_AMD64)
 	cd $(BASE_CWD_DEPTMP) && cd $(CADDY_DEP_REPO_DEEP) && GOOS=darwin GOARCH=arm64 $(CADDY_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(CADDY_DEP)_$(BASE_BIN_SUFFIX_DARWIN_ARM64)
-	
+caddy-dep-linux:
 	cd $(BASE_CWD_DEPTMP) && cd $(CADDY_DEP_REPO_DEEP) && GOOS=linux GOARCH=amd64 $(CADDY_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(CADDY_DEP)_$(BASE_BIN_SUFFIX_LINUX_AMD64)
 	cd $(BASE_CWD_DEPTMP) && cd $(CADDY_DEP_REPO_DEEP) && GOOS=linux GOARCH=arm64 $(CADDY_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(CADDY_DEP)_$(BASE_BIN_SUFFIX_LINUX_ARM64)
-	
+caddy-dep-windows:
 	cd $(BASE_CWD_DEPTMP) && cd $(CADDY_DEP_REPO_DEEP) && GOOS=windows GOARCH=amd64 $(CADDY_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(CADDY_DEP)_$(BASE_BIN_SUFFIX_WINDOWS_AMD64)
 	cd $(BASE_CWD_DEPTMP) && cd $(CADDY_DEP_REPO_DEEP) && GOOS=windows GOARCH=arm64 $(CADDY_GO_BUILD_CMD) -o $(BASE_CWD_DEP)/$(CADDY_DEP)_$(BASE_BIN_SUFFIX_WINDOWS_ARM64)
 
-	rm -rf $(BASE_CWD_DEPTMP)
+
+
+
 
 ### run 
 # every command does a dep check.

@@ -34,7 +34,6 @@ BASE_BIN_NAME=conduit_processor_example
 BASE_BIN_MOD=.
 BASE_BIN_ENTRY=simple/cmd/processor
 
-
 all: this-dep this-src this-bin
 
 ### dep
