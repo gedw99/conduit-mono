@@ -26,8 +26,9 @@ include $(MK)/base.mk
 
 BASE_SRC_NAME=conduit-processor-example
 BASE_SRC_URL=https://github.com/ConduitIO/conduit-processor-example
+# https://github.com/ConduitIO/conduit-processor-example/tags
+# Its NOT tagged at all.
 BASE_SRC_VERSION=main
-#BASE_SRC_VERSION=build-scripts
 
 BASE_BIN_NAME=conduit_processor_example
 BASE_BIN_MOD=.
