@@ -1,4 +1,4 @@
-# STATUS: compiles. Need to test in proejct.
+# Compiles. 
 
 # MUST use this name.
 
@@ -26,21 +26,22 @@ include $(MK)/template.mk
 
 include $(PWD)/this.mk
 
-BASE_SRC_NAME=conduit-connector-file
-BASE_SRC_URL=https://github.com/ConduitIO/conduit-connector-file
-# https://github.com/ConduitIO/conduit-connector-file/releases/tag/v0.7.0
-BASE_SRC_VERSION=v0.7.0
+BASE_SRC_NAME=conduit-connector-s3
+BASE_SRC_URL=https://github.com/ConduitIO/conduit-connector-s3
+# https://github.com/ConduitIO/conduit-connector-s3/releases/tag/v0.6.0
+BASE_SRC_VERSION=v0.6.0
+#BASE_SRC_VERSION=build-scripts
 
-BASE_BIN_NAME=conduit_connector_file
+BASE_BIN_NAME=conduit_connector_s3
 BASE_BIN_MOD=.
 BASE_BIN_ENTRY=cmd/connector
 
 
-this: this-src this-bin
+this: this-dep this-src this-bin
 
 ### dep
 
-this-dep: help-dep base-dep 
+this-dep: help-dep base-dep #caddy-dep hugo-dep nats-cli-dep nats-server-dep proc-dep template-dep
 
 this-dep-all: nats-cli-dep-all template-dep-all
 
@@ -49,10 +50,8 @@ this-dep-all: nats-cli-dep-all template-dep-all
 this-src: base-src
 
 ### bin
-this-bin: base-bin
 
-### run
-#this-run: base-run
+this-bin: base-bin-del base-bin
 
 
 
