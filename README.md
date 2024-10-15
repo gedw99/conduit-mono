@@ -15,6 +15,13 @@ So so not  change them :)  Make an Issue and we work it out.
 
 ## Setup
 
+We first need to ensue you are using ssh keys, so that:
+
+- all git commits are verified commits
+- all deployments are verified
+
+Its pretty easy..
+
 
 1. Ensure your ssh keys are loaded in the .ssh config and the public get in github.
 
