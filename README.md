@@ -44,7 +44,7 @@ cp ./base.env ./base_dev.env
 
 The base_dev.env is gitignored. Its your own .env
 
-Fill in the details to match your ssh key and email.
+Edit your ``` ./base_dev.env ``` to match your ssh key and email.
 
 ```sh
 BASE_SRC_SIGNING_USER_NAME=gedw99
