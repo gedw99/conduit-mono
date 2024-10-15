@@ -6,7 +6,7 @@ Just to make it easier and quicker to work with conduit.
 
 ## Repos
 
-https://conduit.io
+https://github.com/orgs/ConduitIO/repositories
 
-https://github.com/conduitio-labs
+https://github.com/orgs/conduitio-labs/repositories
 
