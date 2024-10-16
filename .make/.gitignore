@@ -1,0 +1,10 @@
+# dlv debug code
+__debug
+
+# . folders
+.bin
+.data
+.dep
+.src
+.pack
+

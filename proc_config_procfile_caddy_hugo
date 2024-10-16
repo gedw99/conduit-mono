@@ -1,9 +1,0 @@
-# runner_config_procfile_caddy
-
-workdir: .
-observe: *.go *.js
-ignore: /vendor
-make-bin: make this-bin
-make-run: make this-run
-make-caddy: restart=fail make this-caddy
-

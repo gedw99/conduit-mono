@@ -1,8 +1,0 @@
-# runner_config_procfile_caddy
-
-workdir: .
-observe: *.go *.js
-ignore: /vendor
-build: make this-bin
-run: make this-run
-

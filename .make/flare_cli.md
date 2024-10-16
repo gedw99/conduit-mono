@@ -1,5 +1,6 @@
 # CLOUDFLARE CLI
 
+To configure Cloudflare as part of Git operations, using .env based configuration.
 
 https://github.com/cloudflare/cloudflare-go/
 
