@@ -3,7 +3,7 @@
 # when at Module.
 #BASE_MAKE_IMPORT=$(PWD)/
 # when inside a Module
-BASE_MAKE_IMPORT=$(PWD)/..
+BASE_MAKE_IMPORT=$(PWD)/../.make
 # wnen inside .dep
 #BASE_MAKE_IMPORT=$(PWD)/.dep
 

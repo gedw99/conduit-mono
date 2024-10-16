@@ -8,7 +8,7 @@
 # when at Module.
 #BASE_MAKE_IMPORT=$(PWD)/
 # when inside a Module
-BASE_MAKE_IMPORT=$(PWD)/..
+BASE_MAKE_IMPORT=$(PWD)/../.make
 # wnen inside .dep
 #BASE_MAKE_IMPORT=$(PWD)/.dep
 
@@ -30,11 +30,11 @@ BASE_SRC_URL=https://github.com/ConduitIO/conduit-processor-example
 # Its NOT tagged at all.
 BASE_SRC_VERSION=main
 
-BASE_BIN_NAME=conduit_processor_example
-BASE_BIN_MOD=.
+BASE_BIN_NAME=conduit_processor_simple
+BASE_BIN_MOD=simple/cmd/processor
 BASE_BIN_ENTRY=simple/cmd/processor
 
-all: this-dep this-src this-bin
+this: this-dep this-src this-bin
 
 ### dep
 

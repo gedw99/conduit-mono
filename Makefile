@@ -44,7 +44,7 @@ this-git-push:
 
 this: this-dep this-src this-bin
 
-this-ci: this-dep
+this-ci: this
 
 this-dep: help-dep base-dep caddy-dep #flare-cli-dep gh-dep hugo-dep nats-cli-dep nats-server-dep proc-dep
 
@@ -64,7 +64,7 @@ this-src:
 	cd $(SRC_CONDUIT) && $(MAKE) this-src
 	cd $(SRC_CONDUIT_CONNECT_FILE) && $(MAKE) this-src
 	cd $(SRC_CONDUIT_CONNECT_S3) && $(MAKE) this-src
-	cd $(SRC_CONDUIT_PROCESSOR_EXAMPLE) && $(MAKE) this-src
+	#cd $(SRC_CONDUIT_PROCESSOR_EXAMPLE) && $(MAKE) this-src
 	cd $(SRC_CONDUIT_SCHEMA_REGISTRY) && $(MAKE) this-src
 	cd $(SRC_CONDUIT_LAB_CONNECT_GOOGLE_SHEET) && $(MAKE) this-src
 
@@ -76,7 +76,7 @@ this-bin:
 	cd $(SRC_CONDUIT) && $(MAKE) this-bin
 	cd $(SRC_CONDUIT_CONNECT_FILE) && $(MAKE) this-bin
 	cd $(SRC_CONDUIT_CONNECT_S3) && $(MAKE) this-bin
-	cd $(SRC_CONDUIT_PROCESSOR_EXAMPLE) && $(MAKE) this-bin
+	#cd $(SRC_CONDUIT_PROCESSOR_EXAMPLE) && $(MAKE) this-bin
 	cd $(SRC_CONDUIT_SCHEMA_REGISTRY) && $(MAKE) this-bin
 	cd $(SRC_CONDUIT_LAB_CONNECT_GOOGLE_SHEET) && $(MAKE) this-bin
 
