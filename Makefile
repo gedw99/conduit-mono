@@ -46,7 +46,7 @@ this: this-dep this-src this-bin
 
 this-ci: this
 
-this-dep: help-dep base-dep caddy-dep #flare-cli-dep gh-dep hugo-dep nats-cli-dep nats-server-dep proc-dep
+this-dep: help-dep base-dep #caddy-dep flare-cli-dep gh-dep hugo-dep nats-cli-dep nats-server-dep proc-dep
 
 ### src
 
@@ -86,6 +86,16 @@ this-bin:
 this-run: 
 	cd $(SRC_CONDUIT) && $(MAKE) this-run
 
+
+this-caddy:
+	# self installs and starts
+	$(MAKE) caddy-run-server
+
 this-hugo:
-	$(MAKE) hugo-print
+	# self installs and starts
+	$(MAKE) hugo-run-server
+
+this-proc:
+	# self installs and starts
+	$(MAKE) proc-run-server
 
