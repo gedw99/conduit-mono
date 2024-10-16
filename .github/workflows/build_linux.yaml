@@ -1,0 +1,33 @@
+name: Build linux
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.22.1
+
+
+      - name: Build 
+        run: make this
+
+      - name: Upload Release Asset
+        run: |
+          gh release upload ${{github.event.release.tag_name}} ./dist/conduit_linux_${{ github.ref_name }}_amd64
+          gh release upload ${{github.event.release.tag_name}} ./dist/conduit_linux_${{ github.ref_name }}_arm64
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash

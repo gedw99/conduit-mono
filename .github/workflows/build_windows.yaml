@@ -1,4 +1,4 @@
-name: Build MacOS
+name: Build windows
 
 on:
   release:
@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repo

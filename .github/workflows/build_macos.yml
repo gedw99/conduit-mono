@@ -1,4 +1,4 @@
-name: Build MacOS
+name: Build darwin
 
 on:
   release:
