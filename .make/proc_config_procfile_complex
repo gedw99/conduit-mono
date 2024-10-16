@@ -1,0 +1,12 @@
+# runner_config_procfile
+# 
+
+workdir: .
+observe: *.go *.js
+ignore: /vendor
+make-bin: make this-bin
+web: restart=fail waitfor=localhost:8888 ./server serve
+web-a: group=web restart=always waitfor=localhost:8888 ./server serve alpha
+web-b: group=web restart=always waitfor=localhost:8888 ./server serve bravo
+db: restart=failure waitfor=web ./server db
+make-caddy: restart=fail make this-caddy
