@@ -1,0 +1,44 @@
+# Caddyfile
+{
+	email gedw99@gmail.com
+
+	log {
+		output stdout
+		format console
+		level DEBUG
+	}
+
+	admin :2019
+}
+
+# https://localhost
+localhost {
+	header * {
+		Cross-Origin-Embedder-Policy require-corp
+		Cross-Origin-Opener-Policy same-origin
+		Access-Control-Allow-Origin "*"
+	}
+	file_server {
+		root {$CADDY_RUN_VAR_BROWSE_PATH}
+		browse
+	}
+}
+
+# hugo preview is on :1313. Need this here too.
+# its hugo running in server mode.
+
+
+# https://hello.localhost
+hello.localhost {
+	respond "Hello world!"
+}
+
+# https://app.localhost
+app.localhost {
+	reverse_proxy {$CADDY_RUN_VAR_PROXY_PATH_PORT}
+}
+
+# https://wasm.localhost
+wasm.localhost {
+	respond "Hello world!"
+}
