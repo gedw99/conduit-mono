@@ -1,6 +1,12 @@
-name: Linters and Tests
+name: CI
 
-on: [pull_request]
+on:
+    push:
+        tags:
+            - v*
+        branches:
+            - main
+    pull_request:
 
 permissions:
   contents: 'read'
@@ -22,4 +28,5 @@ jobs:
 
       - name: Test 
         run: make this-ci
+        shell: bash
 
