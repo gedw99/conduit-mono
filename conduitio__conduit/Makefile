@@ -48,10 +48,15 @@ this-src: base-src
 ### bin and run are custom
 
 this-bin: this-bin-pre base-bin
+	# Test to see it works everywhere.
+	$(MAKE) base-pack
+	$(MAKE) base-pack-reverse
 
 ### run
 
 this-run: this-run-start
+
+
 
 
 

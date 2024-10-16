@@ -1454,7 +1454,7 @@ base-pack-darwin:
 	#@lipo -create -output workflow/$(PROJECT_NAME) workflow/$(PROJECT_NAME)-amd64 workflow/$(PROJECT_NAME)-arm64
 	#@rm -f workflow/$(PROJECT_NAME)-amd64 workflow/$(PROJECT_NAME)-arm64
 
-base-pack-init:
+base-pack-init: base-pack-init-del
 	# So as not to destroy our dev environment, we package to the ".pack" folder
 	mkdir -p $(BASE_CWD_PACK)
 base-pack-init-del:
@@ -1489,7 +1489,7 @@ base-pack: base-pack-init
 	cp Makefile $(BASE_CWD_PACK)
 	cp $(BASE_MAKE_IMPORT)/base*.* $(BASE_CWD_PACK)
 
-base-pack-reverse-init:
+base-pack-reverse-init: base-pack-reverse-init-del
 	mkdir -p $(BASE_CWD_PACK_REVERSE)
 base-pack-reverse-init-del:
 	# We dont do this normally

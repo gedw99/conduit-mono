@@ -8,4 +8,5 @@ __debug
 .deptmp
 .src
 .pack
+.packreverse
 

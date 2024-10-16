@@ -68,7 +68,7 @@ this-src:
 	cd $(SRC_CONDUIT_SCHEMA_REGISTRY) && $(MAKE) this-src
 	cd $(SRC_CONDUIT_LAB_CONNECT_GOOGLE_SHEET) && $(MAKE) this-src
 
-	cd $(SRC_NICKCHOMNEY_CONNECT_SURREAL) && $(MAKE) this-src
+	#cd $(SRC_NICKCHOMNEY_CONNECT_SURREAL) && $(MAKE) this-src
 
 ### bin
 
@@ -80,7 +80,13 @@ this-bin:
 	cd $(SRC_CONDUIT_SCHEMA_REGISTRY) && $(MAKE) this-bin
 	cd $(SRC_CONDUIT_LAB_CONNECT_GOOGLE_SHEET) && $(MAKE) this-bin
 
-	cd $(SRC_NICKCHOMNEY_CONNECT_SURREAL) && $(MAKE) this-bin
+	#cd $(SRC_NICKCHOMNEY_CONNECT_SURREAL) && $(MAKE) this-bin
+
+this-pack:
+	$(MAKE) base-pack
+	$(MAKE) base-pack-reverse
+	
+
 ### run
 
 this-run: 

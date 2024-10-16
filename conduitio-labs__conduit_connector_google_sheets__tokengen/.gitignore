@@ -1,6 +1,3 @@
-credentials*
-dummy*
-
 # dlv debug code
 __debug
 
@@ -10,6 +7,11 @@ __debug
 .dep
 .deptmp
 .pack
+.pack-reverse
 .src
+
+# creds
+dummy*
+cred*
 
 
