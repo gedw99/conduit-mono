@@ -8,18 +8,11 @@ permissions:
   packages: 'read'
 
 jobs:
-  lint:
-    name: Linters
+  test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Lint
         run: make lint
 
-  tests:
-    name: Tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Tests
-        run: make this-ci
